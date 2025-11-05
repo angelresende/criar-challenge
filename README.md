@@ -71,7 +71,7 @@ O foco principal da solução é garantir:
     # O seed cria um usuário inicial para teste da API.
     ```
 
-5.  **A API estará disponível em:** `http://localhost:8000`.
+5.  **A API estará disponível em:** `http://localhost:8080`.
 
 📄 **Nota:** *Caso ocorra erro de permissão, na pasta raiz, libere a permissão: sudo chmod -R 777 storage bootstrap/cache.*
 
@@ -109,6 +109,7 @@ Para acessar qualquer rota protegida, inclua o token obtido no cabeçalho de tod
 
 A estrutura segue princípios de Clean Code e Service Layer Pattern.
 | Camada | Responsabilidade |
+| :-------------------- | :-------------------------- |
 | **Controllers** | Camada de entrada da aplicação. Responsável por receber as requisições HTTP, delegar a execução aos *services* e retornar respostas padronizadas (JSON). |
 | **Requests (`App/Http/Requests`)** | Contêm as **regras de validação** e **autorização** das requisições, assegurando que apenas dados válidos cheguem à camada de negócio. |
 | **Services (`App/Services`)** | Centralizam a **lógica de negócio** e orquestram a comunicação entre os repositórios e outras partes do domínio. |

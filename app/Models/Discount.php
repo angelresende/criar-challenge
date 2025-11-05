@@ -16,7 +16,7 @@ class Discount extends Model
     protected $casts = [
         'campaign_id' => 'string',
         'type' => 'string',
-        'value' => 'decimal',
+        'value' => 'decimal:2',
     ];
 
     public function campaign(): BelongsTo

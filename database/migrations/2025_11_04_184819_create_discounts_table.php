@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('campaign_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['amount', 'percentage'])->default('amount')->index();
-            $table->decimal('value');
+            $table->decimal('value', 10, 2)->default(0);
             $table->timestamps();
         });
     }
