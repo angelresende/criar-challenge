@@ -2,33 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CampaignService;
+use App\Services\DiscountService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CampaignRequest;
+use App\Http\Requests\DiscountRequest;
 use Illuminate\Http\Response;
 
-
-class CampaignController extends Controller
+class DiscountController extends Controller
 {
     public function __construct(
-        private CampaignService $campaignService
+        private DiscountService $discountService
     ) {
         parent::__construct();
     }
 
     public function index()
     {
-        $campaigns = $this->campaignService->getAll();
+        $discounts = $this->discountService->getAll();
         return $this->apiResponse->responseEnveloper(
-            data: $campaigns,
+            data: $discounts,
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 
-    public function store(CampaignRequest $request)
+    public function store(DiscountRequest $request)
     {
-        $campaign = $this->campaignService->create($request->validated());
+        $campaign = $this->discountService->create($request->validated());
         return $this->apiResponse->responseEnveloper(
             data: $campaign,
             status: true,
@@ -38,7 +37,7 @@ class CampaignController extends Controller
 
     public function show(string $id)
     {
-        $campaign = $this->campaignService->getOne($id);
+        $campaign = $this->discountService->getOne($id);
         return $this->apiResponse->responseEnveloper(
             data: $campaign,
             status: true,
@@ -46,9 +45,9 @@ class CampaignController extends Controller
         );
     }
 
-    public function update(string $id, CampaignRequest $request)
+    public function update(string $id, DiscountRequest $request)
     {
-        $campaign = $this->campaignService->update($id, $request->validated());
+        $campaign = $this->discountService->update($id, $request->validated());
         return $this->apiResponse->responseEnveloper(
             data: $campaign,
             status: true,
@@ -58,12 +57,13 @@ class CampaignController extends Controller
 
     public function destroy(string $id)
     {
-        $this->campaignService->delete($id);
+        $this->discountService->delete($id);
 
         return $this->apiResponse->responseEnveloper(
-            data: ['message' => 'Campaign deleted successfully'],
+            data: ['message' => 'Discount deleted successfully'],
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 }
+

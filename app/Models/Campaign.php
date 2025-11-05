@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Campaign extends Model
 {
@@ -26,6 +27,12 @@ class Campaign extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function discounts(): HasMany
+    {
+        return $this->hasMany(Discount::class)->orderBy('created_at', 'asc');
+    }
+
 
     public function scopeWithDefaultRelations($query)
     {
