@@ -2,34 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\GroupService;
+use App\Services\CampaignService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
+use App\Http\Requests\CampaignRequest;
 use Illuminate\Http\Response;
 
-class GroupController extends Controller
+
+class CampaignController extends Controller
 {
     public function __construct(
-        private GroupService $groupService
+        private CampaignService $campaignService
     ) {
         parent::__construct();
     }
 
     public function index()
     {
-        $groups = $this->groupService->getAll();
+        $campaigns = $this->campaignService->getAll();
         return $this->apiResponse->responseEnveloper(
-            data: $groups,
+            data: $campaigns,
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 
-    public function store(GroupRequest $request)
+    public function store(CampaignRequest $request)
     {
-        $group = $this->groupService->create($request->validated());
+        $campaign = $this->campaignService->create($request->validated());
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $campaign,
             status: true,
             statusCode: Response::HTTP_CREATED
         );
@@ -37,19 +38,19 @@ class GroupController extends Controller
 
     public function show(string $id)
     {
-        $group = $this->groupService->getOne($id);
+        $campaign = $this->campaignService->getOne($id);
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $campaign,
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 
-    public function update(string $id, GroupRequest $request)
+    public function update(string $id, CampaignRequest $request)
     {
-        $group = $this->groupService->update($id, $request->validated());
+        $campaign = $this->campaignService->update($id, $request->validated());
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $campaign,
             status: true,
             statusCode: Response::HTTP_OK
         );
@@ -57,10 +58,10 @@ class GroupController extends Controller
 
     public function destroy(string $id)
     {
-        $this->groupService->delete($id);
+        $this->campaignService->delete($id);
 
         return $this->apiResponse->responseEnveloper(
-            data: ['message' => 'Group deleted successfully'],
+            data: ['message' => 'City deleted successfully'],
             status: true,
             statusCode: Response::HTTP_OK
         );

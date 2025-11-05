@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CityRequest extends FormRequest
 {
@@ -22,7 +23,9 @@ class CityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'state_id' => ['required', 'string', Rule::exists('states', 'id')],
+            'group_id' => ['required', 'string', Rule::exists('groups', 'id')],
+            'name' => ['required', 'max:255'],
         ];
     }
 }

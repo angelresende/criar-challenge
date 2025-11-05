@@ -18,6 +18,11 @@ class StateResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'abbreviation' => $this->abbreviation,
+            'cities'  => $this->whenLoaded('cities', function () {
+                return $this->resource->cities->map(function ($city) {
+                    return new CityResource($city);
+                });
+            }),
         ];
     }
 }

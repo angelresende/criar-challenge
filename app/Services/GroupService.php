@@ -16,12 +16,14 @@ class GroupService
     public function getAll(): AnonymousResourceCollection
     {
         $groups = $this->repository->getAll();
+        $groups->load(['cities']);
         return GroupResource::collection($groups);
     }
 
     public function getOne(string $id): GroupResource
     {
         $group = $this->repository->getOne($id);
+        $group->load(['cities']);
         if (!$group) {
             throw new NotFoundException(['Group not found']);
         }

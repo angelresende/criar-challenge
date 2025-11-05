@@ -18,6 +18,11 @@ class GroupResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'cities'  => $this->whenLoaded('cities', function () {
+                return $this->resource->cities->map(function ($city) {
+                    return new CityResource($city);
+                });
+            }),
         ];
     }
 }

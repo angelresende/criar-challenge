@@ -16,12 +16,15 @@ class StateService
     public function getAll(): AnonymousResourceCollection
     {
         $states = $this->repository->getAll();
+        $states->load(['cities']);
         return StateResource::collection($states);
     }
 
     public function getOne(string $id): StateResource
     {
         $state = $this->repository->getOne($id);
+        $state->load(['cities']);
+        
         if (!$state) {
             throw new NotFoundException(['State not found']);
         }

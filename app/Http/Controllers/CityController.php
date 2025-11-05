@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\GroupService;
+use App\Services\CityService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
+use App\Http\Requests\CityRequest;
 use Illuminate\Http\Response;
 
-class GroupController extends Controller
+class CityController extends Controller
 {
     public function __construct(
-        private GroupService $groupService
+        private CityService $cityService
     ) {
         parent::__construct();
     }
 
     public function index()
     {
-        $groups = $this->groupService->getAll();
+        $cities = $this->cityService->getAll();
         return $this->apiResponse->responseEnveloper(
-            data: $groups,
+            data: $cities,
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 
-    public function store(GroupRequest $request)
+    public function store(CityRequest $request)
     {
-        $group = $this->groupService->create($request->validated());
+        $city = $this->cityService->create($request->validated());
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $city,
             status: true,
             statusCode: Response::HTTP_CREATED
         );
@@ -37,19 +37,19 @@ class GroupController extends Controller
 
     public function show(string $id)
     {
-        $group = $this->groupService->getOne($id);
+        $city = $this->cityService->getOne($id);
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $city,
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 
-    public function update(string $id, GroupRequest $request)
+    public function update(string $id, CityRequest $request)
     {
-        $group = $this->groupService->update($id, $request->validated());
+        $city = $this->cityService->update($id, $request->validated());
         return $this->apiResponse->responseEnveloper(
-            data: $group,
+            data: $city,
             status: true,
             statusCode: Response::HTTP_OK
         );
@@ -57,12 +57,13 @@ class GroupController extends Controller
 
     public function destroy(string $id)
     {
-        $this->groupService->delete($id);
+        $this->cityService->delete($id);
 
         return $this->apiResponse->responseEnveloper(
-            data: ['message' => 'Group deleted successfully'],
+            data: ['message' => 'City deleted successfully'],
             status: true,
             statusCode: Response::HTTP_OK
         );
     }
 }
+

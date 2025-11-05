@@ -18,8 +18,8 @@ class Campaign extends Model
         'name' => 'string',
         'description' => 'string',
         'status' => 'string',
-        'start_date' => 'date',
-        'end_date' => 'date',
+        'start_date' => 'date:d/m/Y',
+        'end_date' => 'date:d/m/Y',
     ];
 
     public function group(): BelongsTo

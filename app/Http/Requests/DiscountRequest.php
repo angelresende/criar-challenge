@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DiscountRequest extends FormRequest
 {
@@ -21,8 +22,8 @@ class DiscountRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+         return [
+            'campaign_id' => ['required', 'string', Rule::exists('campaigns', 'id')],
         ];
     }
 }

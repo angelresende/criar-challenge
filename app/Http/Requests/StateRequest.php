@@ -22,8 +22,12 @@ class StateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'abbreviation' => 'required|string|max:2|unique:states,abbreviation,' . $this->id,
+            'name' => ['required', 'string', 'max:255'],
+            'abbreviation' => ['required',
+                                'string',
+                                'max:2',
+                                'unique:states,abbreviation,' . $this->id,
+                            ],
         ];
     }
 }

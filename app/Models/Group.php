@@ -20,7 +20,7 @@ class Group extends Model
 
     public function cities(): HasMany
     {
-        return $this->hasMany(City::class);
+        return $this->hasMany(City::class)->orderBy('name', 'asc');
     }
 
     public function scopeWithDefaultRelations($query)
