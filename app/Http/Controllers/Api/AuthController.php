@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\Response;
 
 class AuthController extends Controller
@@ -13,16 +12,6 @@ class AuthController extends Controller
     public function __construct(private AuthService $authService)
     {
         parent::__construct();
-    }
-
-    public function register(RegisterRequest $request)
-    {
-        $data = $this->authService->register($request->validated());
-        return $this->apiResponse->responseEnveloper(
-            data: $data,
-            status: true,
-            statusCode: Response::HTTP_CREATED
-        );
     }
 
     public function login(LoginRequest $request)

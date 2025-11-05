@@ -22,7 +22,17 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',             // pelo menos 8 caracteres
+                'regex:/[a-z]/',     // ao menos uma letra minúscula
+                'regex:/[A-Z]/',     // ao menos uma letra maiúscula
+                'regex:/[0-9]/',     // ao menos um número
+                'regex:/[@$!%*#?&]/' // ao menos um caractere especial
+            ],
         ];
     }
 }

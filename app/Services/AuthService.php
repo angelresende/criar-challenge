@@ -9,24 +9,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-    /**
-     * Register a new user and return token data.
-     */
-    public function register(array $data): array
-    {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-
-        $token = $user->createToken('api_token')->plainTextToken;
-
-        return [
-            'user' => $user,
-            'token' => $token,
-        ];
-    }
 
     /**
      * Authenticate user and return token data.
