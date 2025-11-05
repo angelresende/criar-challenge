@@ -16,7 +16,7 @@ class Product extends Model
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
-        'base_price' => 'decimal',
+        'base_price' => 'decimal:2',
     ];
 
     public function scopeWithDefaultRelations($query)

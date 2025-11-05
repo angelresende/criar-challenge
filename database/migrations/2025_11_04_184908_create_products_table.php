@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('name');
             $table->text('description');
-            $table->decimal('base_price');
+            $table->decimal('base_price', 10, 2)->default(0);
             $table->timestamps();
         });
     }
