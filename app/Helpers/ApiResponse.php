@@ -36,7 +36,6 @@ class ApiResponse
             errorMessage: $errorCodeEnum['errorMessage'],
             errorList: $errors
         );
-        $this->response->meta = $this->getMetaResponse();
 
         Log::channel('criarApi')->warning(
             $errorCodeEnum['errorMessage'],
@@ -58,7 +57,6 @@ class ApiResponse
         ?int $errorCode = null,
         string $errorMessage = "Generic Error",
         int $statusCode = Response::HTTP_OK,
-        array $additionalInformation = [],
         $jsonOptions = 0
     ) {
 
@@ -73,7 +71,6 @@ class ApiResponse
         $this->response->success = $status;
         $this->response->result = $data;
         $this->response->error = $status ? [] : $this->getErrorResponse($errorCode, $errorMessage, $errorList);
-        $this->response->meta = $this->getMetaResponse($data, $additionalInformation);
 
         return response()->json($this->response, $statusCode, options: $jsonOptions);
     }

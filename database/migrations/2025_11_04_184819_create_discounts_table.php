@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('discounts', function (Blueprint $table) {
-            $table->ulid()->primary();
+            $table->ulid('id')->primary();
             $table->foreignUlid('campaign_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['amount', 'percentage'])->default('amount')->index();
             $table->decimal('value');

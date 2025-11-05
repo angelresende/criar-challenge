@@ -61,11 +61,19 @@ O foco principal da solução é garantir:
 4.  **Executar Migrações e Seeds:**
     Acesse o contêiner da aplicação e execute os comandos:
     ```bash
+    docker-compose exec app composer install
+    # Instalação composer.
+
+    docker-compose exec app php artisan key:generate
+    # Gerar chave.
+
     docker-compose exec app php artisan migrate --seed
     # O seed cria um usuário inicial para teste da API.
     ```
 
-5.  **A API estará disponível em:** `http://localhost:1000`.
+5.  **A API estará disponível em:** `http://localhost:8000`.
+
+📄 **Nota:** *Caso ocorra erro de permissão, na pasta raiz, libere a permissão: sudo chmod -R 777 storage bootstrap/cache.*
 
 ## 🔑 Autenticação (Laravel Sanctum)
 
@@ -100,11 +108,12 @@ Para acessar qualquer rota protegida, inclua o token obtido no cabeçalho de tod
 🧩 1. Separação de Responsabilidades (Clean Architecture)
 
 A estrutura segue princípios de Clean Code e Service Layer Pattern.
-| Camada                        | Responsabilidade                        |
-|------------------------------------------------------------------------------------------------------------------ |
-| **Controllers**               | Recebem as requisições, chamam os *services* e retornam as respostas HTTP.|
-| **Services (`App/Services`)** | Contêm a **lógica de negócio**. 
-| **Models**                    | Gerenciam relacionamentos e atuam como **DTOs**. |
+| Camada | Responsabilidade |
+| **Controllers** | Camada de entrada da aplicação. Responsável por receber as requisições HTTP, delegar a execução aos *services* e retornar respostas padronizadas (JSON). |
+| **Requests (`App/Http/Requests`)** | Contêm as **regras de validação** e **autorização** das requisições, assegurando que apenas dados válidos cheguem à camada de negócio. |
+| **Services (`App/Services`)** | Centralizam a **lógica de negócio** e orquestram a comunicação entre os repositórios e outras partes do domínio. |
+| **Repositories (`App/Repositories`)** | Responsáveis pela **persistência e recuperação de dados**. Isolam o Eloquent e permitem fácil substituição futura por outro ORM ou fonte de dados. |
+| **Models (`App/Models`)** | Representam as entidades do domínio, gerenciam os **relacionamentos Eloquent** e atuam como **DTOs** quando necessário. |
 
 
 ### 🧠 2. Regra de Negócio Central — Campanha Ativa Única

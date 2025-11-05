@@ -27,4 +27,9 @@ class Campaign extends Model
         return $this->belongsTo(Group::class);
     }
 
+    public function scopeWithDefaultRelations($query)
+    {
+        return $query->with('group');
+    }
+
 }

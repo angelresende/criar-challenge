@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('campaigns', function (Blueprint $table) {
-            $table->ulid()->primary();
+            $table->ulid('id')->primary();
             $table->foreignUlid('group_id')->constrained('groups')->cascadeOnDelete();
             $table->foreignUlid('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUlid('updated_by')->nullable()->constrained('users')->nullOnDelete();

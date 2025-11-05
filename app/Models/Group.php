@@ -23,4 +23,8 @@ class Group extends Model
         return $this->hasMany(City::class);
     }
 
+    public function scopeWithDefaultRelations($query)
+    {
+        return $query;
+    }
 }

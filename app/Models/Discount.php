@@ -23,4 +23,9 @@ class Discount extends Model
     {
         return $this->belongsTo(Campaign::class);
     }
+
+    public function scopeWithDefaultRelations($query)
+    {
+        return $query->with('campaign');
+    }
 }

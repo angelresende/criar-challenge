@@ -28,4 +28,9 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    public function scopeWithDefaultRelations($query)
+    {
+        return $query->with(['group', 'state']);
+    }
 }

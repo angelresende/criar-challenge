@@ -18,4 +18,9 @@ class Product extends Model
         'description' => 'string',
         'base_price' => 'decimal',
     ];
+
+    public function scopeWithDefaultRelations($query)
+    {
+        return $query;
+    }
 }
