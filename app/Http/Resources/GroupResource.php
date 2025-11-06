@@ -23,6 +23,13 @@ class GroupResource extends JsonResource
                     return new CityResource($city);
                 });
             }),
+            'active_campaigns' => CampaignResource::collection(
+                $this->whenLoaded('activeCampaigns')
+            ),
+
+            'past_campaigns' => CampaignResource::collection(
+                $this->whenLoaded('pastCampaigns')
+            ),
         ];
     }
 }

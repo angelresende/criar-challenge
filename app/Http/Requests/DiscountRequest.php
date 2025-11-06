@@ -24,11 +24,12 @@ class DiscountRequest extends FormRequest
     {
          return [
             'campaign_id' => ['required', 'string', Rule::exists('campaigns', 'id')],
+            'name'  => ['required','string'],
             'value' => ['required', 'decimal:0,2', 'min:0'],
-            'status' => [
+            'type' => [
                 'required',
                 'string',
-                'in:amount, percentage'
+                'in:amount,percentage'
             ],
         ];
     }

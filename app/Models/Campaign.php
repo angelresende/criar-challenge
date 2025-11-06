@@ -33,10 +33,19 @@ class Campaign extends Model
         return $this->hasMany(Discount::class)->orderBy('created_at', 'asc');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
+    public function scopePast($query)
+    {
+        return $query->whereIn('status', ['paused', 'expired', 'cancelled']);
+    }
 
     public function scopeWithDefaultRelations($query)
     {
-        return $query->with('group');
+        return $query->with(['group', 'discounts']);
     }
 
 }

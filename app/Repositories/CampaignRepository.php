@@ -12,4 +12,17 @@ class CampaignRepository extends AbstractRepository implements RepositoryInterfa
         return new Campaign();
     }
 
+    public function deactivateOtherCampaigns(string $groupId, ?string $ignoreId = null): void
+    {
+        $query = $this->getModel()
+            ->where('group_id', $groupId)
+            ->where('status', 'active');
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        $query->update(['status' => 'paused']);
+    }
+
 }

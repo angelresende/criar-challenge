@@ -11,10 +11,11 @@ class Discount extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['campaign_id', 'type', 'value'];
+    protected $fillable = ['campaign_id', 'name', 'type', 'value'];
 
     protected $casts = [
         'campaign_id' => 'string',
+        'name' => 'string',
         'type' => 'string',
         'value' => 'decimal:2',
     ];

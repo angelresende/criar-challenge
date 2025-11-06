@@ -16,7 +16,7 @@ class GroupService
     public function getAll(): AnonymousResourceCollection
     {
         $groups = $this->repository->getAll();
-        $groups->load(['cities']);
+        $groups->load(['cities', 'campaigns', 'activeCampaigns.discounts', 'pastCampaigns.discounts']);
         return GroupResource::collection($groups);
     }
 

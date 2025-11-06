@@ -153,9 +153,9 @@ A tabela `campaigns` contém o campo `status`, que define o estágio atual da ca
 
 ### ⚙️ Regras Automáticas Sugeridas
 
-* Apenas **uma campanha** com status `active` pode existir por cluster.
+* Apenas **uma campanha** com status `active` pode existir por grupo.
 * Se `end_date` for menor que a data atual e `status = active`, o status deve ser atualizado para `expired`.
-* Ao ativar uma nova campanha em um cluster, as demais campanhas ativas do mesmo grupo são desativadas automaticamente (transição para `paused` ou `expired`).
+* Ao ativar uma nova campanha em um grupo, as demais campanhas ativas do mesmo grupo são desativadas automaticamente (transição para `paused` ou `expired`).
 
 ### 💰 Descontos
 

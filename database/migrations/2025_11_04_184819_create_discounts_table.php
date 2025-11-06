@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('campaign_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
             $table->enum('type', ['amount', 'percentage'])->default('amount')->index();
             $table->decimal('value', 10, 2)->default(0);
             $table->timestamps();

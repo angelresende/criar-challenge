@@ -22,6 +22,11 @@ class CampaignResource extends JsonResource
             'status' => $this->status,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
+            'discounts'  => $this->whenLoaded('discounts', function () {
+                return $this->resource->discounts->map(function ($discount) {
+                    return new DiscountResource($discount);
+                });
+            }),
         ];
     }
 }

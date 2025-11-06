@@ -23,8 +23,23 @@ class Group extends Model
         return $this->hasMany(City::class)->orderBy('name', 'asc');
     }
 
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
+
+    public function activeCampaigns()
+    {
+        return $this->hasMany(Campaign::class)->active();
+    }
+
+    public function pastCampaigns()
+    {
+        return $this->hasMany(Campaign::class)->past();
+    }
+
     public function scopeWithDefaultRelations($query)
     {
-        return $query;
+        return $query->with(['cities', 'campaigns', 'activeCampaigns', 'pastCampaigns']);
     }
 }
